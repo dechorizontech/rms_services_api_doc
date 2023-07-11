@@ -17,9 +17,9 @@
     "schemas": {}
   },
   "paths": {
-    "/api/bidding/v1/{lang}/submission/": {
+    "/api/auth/v1/{lang}/example/": {
       "get": {
-        "tags": ["Bidding service"],
+        "tags": ["Auth service"],
         "parameters": [
           {
             "in": "path",
