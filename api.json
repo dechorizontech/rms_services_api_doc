@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "RMS Services API Reference",
+    "summary": "This document provides a comprehensive reference guide for the RMS Services API. The RMS Services API is a set of RESTful endpoints that allow developers to programmatically interact with RMS Services. This document includes detailed descriptions of each available endpoint, as well as the parameters, methods, and data structures used by the API.",
+    "description": "Copyright: © Keture 2023. All rights reserved. This API reference is provided solely for the purpose of development and testing. Any commercial use or redistribution of this API, or any part thereof, is strictly prohibited without the prior written consent of Keture.",
+    "version": "1.0.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {}
+  },
+  "paths": {
+    "/api/bidding/v1/{lang}/submission/": {
+      "get": {
+        "tags": ["Bidding service"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lang",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "example": [
+                    {
+                      "id": 2,
+                      "bid_price": 28000,
+                      "auctions": {
+                        "id": 1,
+                        "scheduled_end_at": "2023-02-25T18:47:49.000Z",
+                        "item_weight": 25.5,
+                        "starting_bid_price": 8000,
+                        "status": "ACTIVE",
+                        "description": "Test Description",
+                        "auction_images": [],
+                        "bids": [
+                          {
+                            "bid_price": 28000,
+                            "user_id": 1
+                          }
+                        ],
+                        "users": {
+                          "name": "Josiah",
+                          "mobile_number": "766641295"
+                        },
+                        "items": {
+                          "grade": "XL",
+                          "image_url": "https://ik.imagekit.io/f3fishapp/BlueSwimmingCrab_KQYhehJd2.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1661015509786",
+                          "name": "Blue Swimming Crab"
+                        },
+                        "_count": {
+                          "bids": 2
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "statusCode": 401,
+                    "error": "Unauthorized",
+                    "message": "Authorization token is invalid: The token signature is invalid."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Bidding service"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["auction_id", "bid_price"],
+                "properties": {
+                  "auction_id": {
+                    "type": "integer"
+                  },
+                  "bid_price": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "auction_id": 1,
+                  "bid_price": 8000
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lang",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "en"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "The bid has been added successfully."
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "statusCode": 500,
+                    "error": "Internal Server Error",
+                    "message": "The bid price should be higher than the current price."
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "statusCode": 401,
+                    "error": "Unauthorized",
+                    "message": "Authorization token is invalid: The token signature is invalid."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth service",
+      "description": "The authentication microservice is responsible for managing user accounts, providing a secure login mechanism, and enforcing access control to the system."
+    }
+  ]
+}
