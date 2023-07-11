@@ -109,7 +109,7 @@
         }
       },
       "post": {
-        "tags": ["Bidding service"],
+        "tags": ["Auth service"],
         "requestBody": {
           "content": {
             "application/json": {
