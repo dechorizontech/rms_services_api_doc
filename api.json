@@ -67,6 +67,9 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "name": "Sales"
             }
           }
         ],
@@ -98,6 +101,10 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "id": 123,
+              "name": "Engneering"
             }
           }
         ],
@@ -126,6 +133,9 @@
                   "type": "integer"
                 }
               }
+            },
+            "example": {
+              "id": 123
             }
           }
         ],
@@ -198,6 +208,10 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "name": "Full-time",
+              "description": "A full-time permanent job."
             }
           }
         ],
@@ -208,7 +222,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job type Created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Full-time",
+                  "description": "A full-time permanent job."
+                }
+              }
+            }
           }
         }
       },
@@ -232,6 +255,11 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "id": 123,
+              "name": "Part-time",
+              "description": "A part-time temporary job."
             }
           }
         ],
@@ -242,7 +270,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job type Updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Part-time",
+                  "description": "A part-time temporary job."
+                }
+              }
+            }
           }
         }
       },
@@ -260,6 +297,9 @@
                   "type": "integer"
                 }
               }
+            },
+            "example": {
+              "id": 123
             }
           }
         ],
@@ -270,7 +310,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job type Deleted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Job type with id 123 was deleted successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -332,6 +379,10 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "name": "Remote",
+              "description": "Ability to work remotely."
             }
           }
         ],
@@ -342,7 +393,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Work Style Created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Remote",
+                  "description": "Ability to work remotely."
+                }
+              }
+            }
           }
         }
       },
@@ -366,6 +426,11 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "id": 123,
+              "name": "Hybrid",
+              "description": "Combination of office and remote work."
             }
           }
         ],
@@ -376,7 +441,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Work Style Updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Hybrid",
+                  "description": "Combination of office and remote work."
+                }
+              }
+            }
           }
         }
       },
@@ -404,7 +478,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Work Style Deleted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Work style with id 123 was deleted successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -466,6 +547,10 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "name": "Entry",
+              "description": "Beginner or junior level job."
             }
           }
         ],
@@ -476,7 +561,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job Level Created",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Entry",
+                  "description": "Beginner or junior level job."
+                }
+              }
+            }
           }
         }
       },
@@ -500,6 +594,11 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "id": 123,
+              "name": "Mid",
+              "description": "Intermediate level job."
             }
           }
         ],
@@ -510,7 +609,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job Level Updated",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 123,
+                  "name": "Mid",
+                  "description": "Intermediate level job."
+                }
+              }
+            }
           }
         }
       },
@@ -528,6 +636,9 @@
                   "type": "integer"
                 }
               }
+            },
+            "example": {
+              "id": 123
             }
           }
         ],
@@ -538,7 +649,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job Level Deleted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Job level with id 123 was deleted successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -585,6 +703,10 @@
                   "type": "number"
                 }
               }
+            },
+            "example": {
+              "start": 0,
+              "end": 10
             }
           }
         ],
@@ -595,7 +717,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Applications Fetched",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 123,
+                    "candidateName": "John Doe"
+                  },
+                  {
+                    "id": 456,
+                    "candidateName": "Jane Doe"
+                  }
+                ]
+              }
+            }
           }
         }
       }
@@ -630,12 +766,27 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "fullName": "John Doe",
+              "email": "john@email.com",
+              "phone": "1234567890",
+              "linkedIn_url": "linkedin.com/john",
+              "resume_file": "resume.pdf",
+              "candidate_id": "abc123"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Applications Submitted",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Application submitted successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -667,12 +818,26 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "email": "john@email.com",
+              "password": "password123",
+              "first_name": "John",
+              "last_name": "Doe",
+              "phone_number": "1234567890"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "User Registered",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Registration successful"
+                }
+              }
+            }
           }
         }
       }
@@ -695,12 +860,24 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "email": "john@email.com",
+              "password": "password123"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Login Successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "string",
+                  "refreshToken": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -720,6 +897,9 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "refresh_token": "string"
             }
           }
         ],
@@ -730,7 +910,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Token Refreshed",
+            "content": {
+              "application/json": {
+                "example": {
+                  "access_token": "string",
+                  "refresh_token": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -783,12 +971,30 @@
                   "type": "number"
                 }
               }
+            },
+            "example": {
+              "start": 0,
+              "end": 10
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Jobs Fetched",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 123,
+                    "title": "Software Engineer"
+                  },
+                  {
+                    "id": 456,
+                    "title": "Product Manager"
+                  }
+                ]
+              }
+            }
           }
         }
       }
@@ -830,12 +1036,30 @@
                   "type": "number"
                 }
               }
+            },
+            "example": {
+              "start": 0,
+              "end": 10
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Companies Fetched",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 123,
+                    "name": "Company A"
+                  },
+                  {
+                    "id": 456,
+                    "name": "Company B"
+                  }
+                ]
+              }
+            }
           }
         }
       }
@@ -944,12 +1168,29 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "organization_name": "Acme Inc",
+              "organization_email": "contact@acme.com",
+              "organization_category_id": 123,
+              "first_name": "John",
+              "last_name": "Doe",
+              "email": "john@acme.com",
+              "password": "password123",
+              "phone_number": "1234567890"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Registration Successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Registered successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -972,12 +1213,24 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "email": "john@acme.com",
+              "password": "password123"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Login Successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "string",
+                  "refreshToken": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -1065,12 +1318,23 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "department_id": 123,
+              "title": "Software Engineer"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job Added",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Job added successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -1096,12 +1360,23 @@
                   "type": "integer"
                 }
               }
+            },
+            "example": {
+              "department_id": 123,
+              "title": "Software Engineer"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Job Added",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Job added successfully"
+                }
+              }
+            }
           }
         }
       }
@@ -1121,6 +1396,9 @@
                   "type": "integer"
                 }
               }
+            },
+            "example": {
+              "id": 123
             }
           }
         ],
@@ -1438,12 +1716,24 @@
                   "type": "string"
                 }
               }
+            },
+            "example": {
+              "email": "admin@example.com",
+              "password": "password123"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Login Successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "accessToken": "string",
+                  "refreshToken": "string"
+                }
+              }
+            }
           }
         }
       }
