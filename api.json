@@ -6,21 +6,54 @@
     "description": "Copyright: © Keture 2023. All rights reserved. This API reference is provided solely for the purpose of development and testing. Any commercial use or redistribution of this API, or any part thereof, is strictly prohibited without the prior written consent of Keture.",
     "version": "1.0.1"
   },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "apiKey",
+
+        "name": "Authorization",
+
+        "in": "header"
+      }
+    },
+
+    "schemas": {}
+  },
   "definitions": {},
   "paths": {
     "/api/v1/cv/upload": {
       "post": {
         "tags": ["Test"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["cv"],
+                "properties": {
+                  "cv": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "example": {
+                "cv": "file_contents_here"
+              }
+            }
+          },
+          "required": true
+        },
         "consumes": ["multipart/form-data"],
         "parameters": [
-          ["cv"],
           {
-            "cv": {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
               "type": "string",
-              "format": "binary"
-            },
-            "in": "formData",
-            "name": "properties"
+              "default": "v1"
+            }
           }
         ],
         "responses": {
@@ -40,6 +73,17 @@
     "/api/v1/admin/department": {
       "get": {
         "tags": ["Admin"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -55,21 +99,33 @@
     "/api/v1/admin/department/": {
       "post": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Sales"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name"],
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "name": "Sales"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -86,25 +142,37 @@
       },
       "put": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": 123,
+                "name": "Engneering"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name", "id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "id": 123,
-              "name": "Engneering"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -121,21 +189,33 @@
       },
       "delete": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 123
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                }
-              }
-            },
-            "example": {
-              "id": 123
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -161,6 +241,15 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "security": [
@@ -178,6 +267,17 @@
     "/api/v1/admin/job_type": {
       "get": {
         "tags": ["Admin"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -193,25 +293,37 @@
     "/api/v1/admin/job_type/": {
       "post": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Full-time",
+                "description": "A full-time permanent job."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name"],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "name": "Full-time",
-              "description": "A full-time permanent job."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -237,29 +349,41 @@
       },
       "put": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": 123,
+                "name": "Part-time",
+                "description": "A part-time temporary job."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name", "id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "id": 123,
-              "name": "Part-time",
-              "description": "A part-time temporary job."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -285,21 +409,33 @@
       },
       "delete": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 123
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                }
-              }
-            },
-            "example": {
-              "id": 123
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -332,6 +468,15 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "security": [
@@ -349,6 +494,17 @@
     "/api/v1/admin/work_style": {
       "get": {
         "tags": ["Admin"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -364,25 +520,37 @@
     "/api/v1/admin/work_style/": {
       "post": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Remote",
+                "description": "Ability to work remotely."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name"],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "name": "Remote",
-              "description": "Ability to work remotely."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -408,29 +576,41 @@
       },
       "put": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": 123,
+                "name": "Hybrid",
+                "description": "Combination of office and remote work."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name", "id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "id": 123,
-              "name": "Hybrid",
-              "description": "Combination of office and remote work."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -456,18 +636,33 @@
       },
       "delete": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": "123"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                }
-              }
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -500,6 +695,16 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "security": [
@@ -517,6 +722,17 @@
     "/api/v1/admin/job_level": {
       "get": {
         "tags": ["Admin"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -532,25 +748,37 @@
     "/api/v1/admin/job_level/": {
       "post": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "Entry",
+                "description": "Beginner or junior level job."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name"],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "name": "Entry",
-              "description": "Beginner or junior level job."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -576,29 +804,41 @@
       },
       "put": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "id": 123,
+                "name": "Mid",
+                "description": "Intermediate level job."
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["name", "id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "id": 123,
-              "name": "Mid",
-              "description": "Intermediate level job."
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -624,21 +864,33 @@
       },
       "delete": {
         "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 123
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                }
-              }
-            },
-            "example": {
-              "id": 123
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -671,6 +923,16 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "security": [
@@ -688,25 +950,37 @@
     "/api/v1/jobportal/application/all_apliactions": {
       "post": {
         "tags": ["Jobportal"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["start", "end"],
+                "properties": {
+                  "start": {
+                    "type": "number"
+                  },
+                  "end": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "start": 0,
+                "end": 10
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["start", "end"],
-              "properties": {
-                "start": {
-                  "type": "number"
-                },
-                "end": {
-                  "type": "number"
-                }
-              }
-            },
-            "example": {
-              "start": 0,
-              "end": 10
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -739,41 +1013,59 @@
     "/api/v1/jobportal/application/": {
       "post": {
         "tags": ["Jobportal"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "fullName",
+                  "email",
+                  "phone",
+                  "linkedIn_url",
+                  "resume_file"
+                ],
+                "properties": {
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "linkedIn_url": {
+                    "type": "string"
+                  },
+                  "resume_file": {
+                    "type": "string"
+                  },
+                  "candidate_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "fullName": "John Doe",
+                "email": "john@email.com",
+                "phone": "1234567890",
+                "linkedIn_url": "linkedin.com/john",
+                "resume_file": "resume.pdf",
+                "candidate_id": "abc123"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["fullName,email,phone,linkedIn_url,resume_file"],
-              "properties": {
-                "fullName": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "phone": {
-                  "type": "string"
-                },
-                "linkedIn_url": {
-                  "type": "string"
-                },
-                "resume_file": {
-                  "type": "string"
-                },
-                "candidate_id": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "fullName": "John Doe",
-              "email": "john@email.com",
-              "phone": "1234567890",
-              "linkedIn_url": "linkedin.com/john",
-              "resume_file": "resume.pdf",
-              "candidate_id": "abc123"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -794,37 +1086,49 @@
     "/api/v1/jobportal/auth/register": {
       "post": {
         "tags": ["Jobportal", "Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "john@email.com",
+                "password": "password123",
+                "first_name": "John",
+                "last_name": "Doe",
+                "phone_number": "1234567890"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["email", "password"],
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "first_name": {
-                  "type": "string"
-                },
-                "last_name": {
-                  "type": "string"
-                },
-                "phone_number": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "email": "john@email.com",
-              "password": "password123",
-              "first_name": "John",
-              "last_name": "Doe",
-              "phone_number": "1234567890"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -845,25 +1149,37 @@
     "/api/v1/jobportal/auth/login": {
       "post": {
         "tags": ["Jobportal", "Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "john@email.com",
+                "password": "password123"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["email", "password"],
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "email": "john@email.com",
-              "password": "password123"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -885,21 +1201,33 @@
     "/api/v1/jobportal/auth/refresh": {
       "post": {
         "tags": ["Auth", "Jobportal"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "refresh_token": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "refresh_token": "string"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -926,18 +1254,30 @@
     "/api/v1/jobportal/auth/logout": {
       "post": {
         "tags": ["Auth", "Jobportal"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
                 }
               }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -956,25 +1296,37 @@
     "/api/v1/jobportal/job/all_jobs": {
       "post": {
         "tags": ["Jobportal"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["start", "end"],
+                "properties": {
+                  "start": {
+                    "type": "number"
+                  },
+                  "end": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "start": 0,
+                "end": 10
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["start", "end"],
-              "properties": {
-                "start": {
-                  "type": "number"
-                },
-                "end": {
-                  "type": "number"
-                }
-              }
-            },
-            "example": {
-              "start": 0,
-              "end": 10
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1009,6 +1361,16 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "responses": {
@@ -1021,25 +1383,37 @@
     "/api/v1/jobportal/organization/all_companies": {
       "post": {
         "tags": ["Jobportal"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["start", "end"],
+                "properties": {
+                  "start": {
+                    "type": "number"
+                  },
+                  "end": {
+                    "type": "number"
+                  }
+                }
+              },
+              "example": {
+                "start": 0,
+                "end": 10
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["start", "end"],
-              "properties": {
-                "start": {
-                  "type": "number"
-                },
-                "end": {
-                  "type": "number"
-                }
-              }
-            },
-            "example": {
-              "start": 0,
-              "end": 10
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1074,6 +1448,16 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "responses": {
@@ -1086,6 +1470,17 @@
     "/api/v1/jobportal/main/popular-category": {
       "get": {
         "tags": ["Jobportal"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1096,6 +1491,17 @@
     "/api/v1/jobportal/main/featured-jobs": {
       "get": {
         "tags": ["Jobportal"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1106,6 +1512,17 @@
     "/api/v1/jobportal/main/top-recruiters": {
       "get": {
         "tags": ["Jobportal"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1116,6 +1533,17 @@
     "/api/v1/jobportal/main/counts": {
       "get": {
         "tags": ["Jobportal"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1126,58 +1554,70 @@
     "/api/v1/dashboard/auth/register": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "organization_name",
+                  "organization_email",
+                  "organization_category_id",
+                  "first_name",
+                  "last_name",
+                  "email",
+                  "password",
+                  "phone_number"
+                ],
+                "properties": {
+                  "organization_name": {
+                    "type": "string"
+                  },
+                  "organization_email": {
+                    "type": "string"
+                  },
+                  "organization_category_id": {
+                    "type": "integer"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "organization_name": "Acme Inc",
+                "organization_email": "contact@acme.com",
+                "organization_category_id": 123,
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "john@acme.com",
+                "password": "password123",
+                "phone_number": "1234567890"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": [
-                "organization_name",
-                "organization_email",
-                "organization_category_id",
-                "first_name",
-                "last_name",
-                "email",
-                "password",
-                "phone_number"
-              ],
-              "properties": {
-                "organization_name": {
-                  "type": "string"
-                },
-                "organization_email": {
-                  "type": "string"
-                },
-                "organization_category_id": {
-                  "type": "integer"
-                },
-                "first_name": {
-                  "type": "string"
-                },
-                "last_name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "phone_number": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "organization_name": "Acme Inc",
-              "organization_email": "contact@acme.com",
-              "organization_category_id": 123,
-              "first_name": "John",
-              "last_name": "Doe",
-              "email": "john@acme.com",
-              "password": "password123",
-              "phone_number": "1234567890"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1198,25 +1638,37 @@
     "/api/v1/dashboard/auth/login": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "john@acme.com",
+                "password": "password123"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["email", "password"],
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "email": "john@acme.com",
-              "password": "password123"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1238,18 +1690,33 @@
     "/api/v1/dashboard/auth/refresh": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "refreshToken": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
-                }
-              }
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1263,18 +1730,33 @@
     "/api/v1/dashboard/auth/logout": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "refreshToken": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
-                }
-              }
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1288,6 +1770,17 @@
     "/api/v1/dashboard/job": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1303,25 +1796,37 @@
     "/api/v1/dashboard/job/add": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "department_id"],
+                "properties": {
+                  "department_id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "department_id": 123,
+                "title": "Software Engineer"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["title", "department_id"],
-              "properties": {
-                "department_id": {
-                  "type": "integer"
-                },
-                "title": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "department_id": 123,
-              "title": "Software Engineer"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1342,28 +1847,40 @@
     "/api/v1/dashboard/job/edit": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "department_id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "department_id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "department_id": 123,
+                "title": "Software Engineer"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["title", "department_id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "department_id": {
-                  "type": "integer"
-                }
-              }
-            },
-            "example": {
-              "department_id": 123,
-              "title": "Software Engineer"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1384,21 +1901,33 @@
     "/api/v1/dashboard/job/delete": {
       "post": {
         "tags": ["Dashboard"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "id": 123
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": {
-                  "type": "integer"
-                }
-              }
-            },
-            "example": {
-              "id": 123
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1424,6 +1953,16 @@
             "required": true,
             "in": "path",
             "name": "id"
+          },
+
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
           }
         ],
         "security": [
@@ -1441,6 +1980,17 @@
     "/api/v1/seed/admin": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1451,6 +2001,17 @@
     "/api/v1/seed/department": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1461,6 +2022,17 @@
     "/api/v1/seed/job_type": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1471,6 +2043,17 @@
     "/api/v1/seed/job_level": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1481,6 +2064,17 @@
     "/api/v1/seed/roles": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1491,6 +2085,17 @@
     "/api/v1/seed/organization_category": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1501,6 +2106,17 @@
     "/api/v1/seed/work_style": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1511,6 +2127,17 @@
     "/api/v1/dashboard/data/department": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1521,6 +2148,17 @@
     "/api/v1/dashboard/data/job_type": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1536,6 +2174,17 @@
     "/api/v1/dashboard/data/job_level": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1551,6 +2200,17 @@
     "/api/v1/dashboard/data/organization_category": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1566,6 +2226,17 @@
     "/api/v1/dashboard/data/work_style": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1581,6 +2252,17 @@
     "/api/v1/dashboard/organization/department": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1596,6 +2278,17 @@
     "/api/v1/dashboard/organization/job_level": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1611,6 +2304,17 @@
     "/api/v1/dashboard/organization/job": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1626,6 +2330,17 @@
     "/api/v1/dashboard/organization/work_style": {
       "get": {
         "tags": ["Dashboard"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "security": [
           {
             "bearerAuth": []
@@ -1641,21 +2356,33 @@
     "/api/v1/admin/auth/logout": {
       "post": {
         "tags": ["Auth", "Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "refresh_token": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "refresh_token": "string"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1676,18 +2403,33 @@
     "/api/v1/admin/auth/refresh": {
       "post": {
         "tags": ["Auth", "Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["refresh_token"],
+                "properties": {
+                  "refresh_token": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "refresh_token": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["refresh_token"],
-              "properties": {
-                "refresh_token": {
-                  "type": "string"
-                }
-              }
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1701,25 +2443,37 @@
     "/api/v1/admin/auth/login": {
       "post": {
         "tags": ["Admin", "Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "admin@example.com",
+                "password": "password123"
+              }
+            }
+          },
+          "required": true
+        },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "in": "path",
+            "name": "v1",
+            "required": true,
             "schema": {
-              "type": "object",
-              "required": ["email", "password"],
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                }
-              }
-            },
-            "example": {
-              "email": "admin@example.com",
-              "password": "password123"
+              "type": "string",
+              "default": "v1"
             }
           }
         ],
@@ -1741,6 +2495,17 @@
     "/api/v1/seed/all": {
       "get": {
         "tags": ["Seed"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "v1",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "v1"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response"
@@ -1749,6 +2514,8 @@
       }
     }
   },
+  "host": "decho-ecsal-1u37eco2q0vd3-657960941.ap-south-1.elb.amazonaws.com",
+  "schemes": ["http"],
   "tags": [
     {
       "name": "Admin",
