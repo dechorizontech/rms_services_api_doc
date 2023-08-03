@@ -1380,58 +1380,107 @@
         }
       }
     },
-    "/api/v1/jobportal/organization/all_companies": {
-      "post": {
+
+    "/api/v1/jobportal/organizations": {
+      "get": {
         "tags": ["Jobportal"],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["start", "end"],
-                "properties": {
-                  "start": {
-                    "type": "number"
-                  },
-                  "end": {
-                    "type": "number"
-                  }
-                }
-              },
-              "example": {
-                "start": 0,
-                "end": 10
-              }
-            }
-          },
-          "required": true
-        },
         "parameters": [
           {
-            "in": "path",
-            "name": "v1",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "v1"
-            }
+            "type": "integer",
+            "default": 1,
+            "required": false,
+            "in": "query",
+            "name": "page"
+          },
+          {
+            "type": "integer",
+            "default": 10,
+            "required": false,
+            "in": "query",
+            "name": "limit"
+          },
+          {
+            "type": "string",
+            "default": "",
+            "required": false,
+            "in": "query",
+            "name": "search"
           }
         ],
         "responses": {
           "200": {
-            "description": "Companies Fetched",
+            "description": "Organizations List",
             "content": {
               "application/json": {
-                "example": [
-                  {
-                    "id": 123,
-                    "name": "Company A"
-                  },
-                  {
-                    "id": 456,
-                    "name": "Company B"
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "totalPages": {
+                      "type": "integer"
+                    },
+                    "totalCount": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "address": {
+                            "type": "string"
+                          },
+                          "organization_categories": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "_count": {
+                            "type": "object",
+                            "properties": {
+                              "job_openings": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
-                ]
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "page": 1,
+                      "limit": 10,
+                      "totalPages": 1,
+                      "totalCount": 10,
+                      "data": [
+                        {
+                          "name": "Miththiran Inc",
+                          "address": null,
+                          "organization_categories": {
+                            "name": "Software company"
+                          },
+                          "_count": {
+                            "job_openings": 1
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
               }
             }
           }
@@ -1483,7 +1532,30 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Department Details",
+            "content": {
+              "application/json": {
+                "example": {
+                  "departments": {
+                    "id": 1,
+
+                    "name": "Finance",
+
+                    "created_at": "2023-07-27T16:13:57.535Z",
+
+                    "updated_at": "2023-07-27T16:13:57.535Z",
+
+                    "deleted_at": null,
+
+                    "image_url": null
+                  },
+
+                  "_count": {
+                    "job_openings": 1
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1525,7 +1597,27 @@
         ],
         "responses": {
           "200": {
-            "description": "Default Response"
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "Miththiran Inc",
+                  "logo_url": null,
+                  "address": null,
+                  "organization_categories": {
+                    "id": 1,
+                    "name": "Software company",
+                    "description": "This organization is dedicated to creating software products for a variety of applications, including business, entertainment, and education.",
+                    "created_at": "2023-07-27T16:13:57.128Z",
+                    "updated_at": "2023-07-27T16:13:57.128Z",
+                    "deleted_at": null
+                  },
+                  "_count": {
+                    "job_openings": 1
+                  }
+                }
+              }
+            }
           }
         }
       }
